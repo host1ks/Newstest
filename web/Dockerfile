@@ -1,0 +1,10 @@
+FROM python:3
+ENV PYTHONUNBUFFERED 1
+RUN mkdir /news
+WORKDIR /news
+ADD requirements.txt /news/
+RUN pip install -r requirements.txt
+ADD . /news/
+EXPOSE 8000
+CMD python3 manage.py migrate
+CMD python3 manage.py runserver

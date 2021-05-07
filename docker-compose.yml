@@ -1,0 +1,32 @@
+version: "3"
+
+
+services:
+  redis:
+    image: redis
+    ports:
+      - "6379:6379"
+  pgdb:
+    image: postgres
+    ports:
+      - '0.0.0.0:5432:5432'
+    restart: always
+    volumes:
+      - pgdb:/var/lib/postgresql/data:rw
+    environment:
+      POSTGRES_DB: 'news_db'
+      POSTGRES_USER: 'admin'
+      POSTGRES_PASSWORD: 'qwerty'
+  web:
+    build: ./web
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/news
+    ports:
+      - '8000:8000'
+    depends_on:
+      - pgdb
+
+volumes:
+    pgdb:
+        driver: local
