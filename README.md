@@ -7,4 +7,4 @@
 7. python manage.py migrate
 8. python manage.py runserver
 9. Postman file in root directory: News API.postman_collection.json
-10.
+10.Heroku - immense-beach-55378.herokuapp.com
